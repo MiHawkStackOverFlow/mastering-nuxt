@@ -1,3 +1,3 @@
 <template>
-    <div> Hello Nuxt !!! </div>
+    <div> Hello Nuxt - changed !!! </div>
 </template>

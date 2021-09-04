@@ -1,7 +1,8 @@
 [
   {
-    "name": "",
-    "path": "",
-    "component": "D:\\\\koch\\\\NuxtBnB\\\\node_modules\\\\@nuxt\\\\vue-app\\\\template\\\\pages\\\\index.vue"
+    "name": "index",
+    "path": "/",
+    "component": "D:\\\\koch\\\\NuxtBnB\\\\pages\\\\index.vue",
+    "chunkName": "pages/index"
   }
 ]

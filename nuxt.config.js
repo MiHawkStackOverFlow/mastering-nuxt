@@ -10,6 +10,9 @@ export default {
     },
     meta: [{
       chartset: "utf-8"
-    }]
+    }],
+  },
+  router: {
+    prefetchLinks: false
   }
 }

@@ -23,7 +23,7 @@ export default {
       script: [{
         src: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyD3qMnHWaunC4CplWEmjlnD06JL5UvgQA4&libraries=places&callback=initMap',
         hid: 'map',
-        defer: true,
+        async: true,
         skip: process.client && window.mapLoaded
       }, {
         innerHTML: "window.initMap = function() { window.mapLoaded = true }",
@@ -39,17 +39,28 @@ export default {
       home: {}
     }
   },
+  methods: {
+    showMap() {
+      console.log('mounted');
+      const mapOptions = {
+        zoom: 18,
+        center: new window.google.maps.LatLng(this.home._geoloc.lat, this.home._geoloc.lng),
+        disableDefaultUI: true,
+        zoomControl: true
+      };
+      const map = new window.google.maps.Map(this.$refs.map, mapOptions);
+      const position = new window.google.maps.LatLng(this.home._geoloc.lat, this.home._geoloc.lng);
+      const marker = new window.google.maps.Marker({ position });
+      marker.setMap(map);
+    }
+  },
   mounted() {
-    const mapOptions = {
-      zoom: 18,
-      center: new window.google.maps.LatLng(this.home._geoloc.lat, this.home._geoloc.lng),
-      disableDefaultUI: true,
-      zoomControl: true
-    };
-    const map = new window.google.maps.Map(this.$refs.map, mapOptions);
-    const position = new window.google.maps.LatLng(this.home._geoloc.lat, this.home._geoloc.lng);
-    const marker = new window.google.maps.Marker({ position });
-    marker.setMap(map);
+    const timer = setInterval(() => {
+      if(window.mapLoaded) {
+        clearInterval(timer);
+        this.showMap();
+      }
+    }, 200);
   },
   created() {
     const home = homes.find((home) => home.objectID === this.$route.params.id);
